@@ -1,0 +1,27 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "layout": {
+      ".read": true,
+      "p": {
+        ".write": true,
+        "$key": {
+          ".validate": "$key.matches(/^[gw][0-9]{1,3}$/) && newData.hasChildren(['x', 'y'])",
+          "x": { ".validate": "newData.isNumber() && newData.val() >= -1000000 && newData.val() <= 1000000" },
+          "y": { ".validate": "newData.isNumber() && newData.val() >= -1000000 && newData.val() <= 1000000" },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+    "presence": {
+      ".read": true,
+      "$id": {
+        ".write": true,
+        ".validate": "$id.matches(/^[a-z0-9]{6,24}$/) && newData.hasChildren(['t'])",
+        "t": { ".validate": "newData.isNumber()" },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}
